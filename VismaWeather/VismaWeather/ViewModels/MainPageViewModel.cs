@@ -11,15 +11,29 @@ namespace VismaWeather.ViewModels
     {
         ElTiempoAPI ElTiempoAPI;
 
+        private Provincia selecteProvince;
+        public Provincia SelectedProvince
+        {
+            get { return selecteProvince; }
+            set 
+            { 
+                selecteProvince = value;
+                OnPropertyChanged();
+                LoadCities(SelectedProvince.CODPROV);
+            }
+        }
+
         public ObservableCollection<Provincia> Provinces { get; set; }
+        public ObservableCollection<Municipio> Cities { get; set; }
 
         public MainPageViewModel()
         {
             ElTiempoAPI = new ElTiempoAPI();
             Provinces = new ObservableCollection<Provincia>();
+            Cities = new ObservableCollection<Municipio>();
             LoadProvinces();
         }
-        public async void LoadProvinces()
+        private async void LoadProvinces()
         {
             var provinciaRoot = await ElTiempoAPI.GetProvinces();
             foreach (var provincia in provinciaRoot.provincias)
@@ -27,6 +41,16 @@ namespace VismaWeather.ViewModels
                 Provinces.Add(provincia);
             }
         }
+
+        private async void LoadCities(string CODPROV)
+        {
+            var cityRoot = await ElTiempoAPI.GetCities(CODPROV);
+            foreach (var city in cityRoot.municipios)
+            {
+                Cities.Add(city);
+            }
+        }
+
 
     }
 

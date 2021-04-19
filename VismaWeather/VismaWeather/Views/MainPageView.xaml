@@ -7,7 +7,9 @@
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
             <Label Text="Weather App" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <Picker ItemsSource="{Binding Provinces}" Title="Select a province" ItemDisplayBinding="{Binding NOMBRE_PROVINCIA}"/>
+        <Picker ItemsSource="{Binding Provinces}" Title="Select a province" ItemDisplayBinding="{Binding NOMBRE_PROVINCIA}" SelectedItem="{Binding SelectedProvince}"/>
+        <Picker ItemsSource="{Binding Cities}" Title="Select a city" ItemDisplayBinding="{Binding NOMBRE}" />
+
     </StackLayout>
 
 </ContentPage>
