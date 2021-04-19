@@ -54,6 +54,9 @@
                 </FormattedString>
             </Label.FormattedText>
         </Label>
+        <Image IsVisible="{Binding Ready}" Source="{Binding WeatherStateIcon}"/>
+        <ActivityIndicator VerticalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}"/>
+
 
     </StackLayout>
 

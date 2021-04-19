@@ -11,6 +11,18 @@ namespace VismaWeather.ViewModels
     {
         ElTiempoAPI ElTiempoAPI;
 
+        private string weatherStateIcon;
+
+        public string WeatherStateIcon
+        {
+            get { return weatherStateIcon; }
+            set 
+            { 
+                weatherStateIcon = value;
+                OnPropertyChanged();
+            }
+        }
+
         private Provincia selecteProvince;
         public Provincia SelectedProvince
         {
@@ -18,6 +30,7 @@ namespace VismaWeather.ViewModels
             set 
             { 
                 selecteProvince = value;
+                IsBusy = true;
                 OnPropertyChanged();
                 LoadCities(SelectedProvince.CODPROV);
             }
@@ -31,8 +44,20 @@ namespace VismaWeather.ViewModels
             set 
             { 
                 selectedCity = value;
+                IsBusy = true;
                 OnPropertyChanged();
                 LoadWeather();
+            }
+        }
+
+        private bool isBusy;
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set 
+            { 
+                isBusy = value;
+                OnPropertyChanged();
             }
         }
 
@@ -60,15 +85,18 @@ namespace VismaWeather.ViewModels
             Provinces = new ObservableCollection<Provincia>();
             Cities = new ObservableCollection<Municipio>();
             Ready = false;
+            IsBusy = true;
             LoadProvinces();
         }
         private async void LoadProvinces()
         {
+
             var provinciaRoot = await ElTiempoAPI.GetProvinces();
             foreach (var provincia in provinciaRoot.provincias)
             {
                 Provinces.Add(provincia);
             }
+            IsBusy = false;
         }
 
         private async void LoadCities(string CODPROV)
@@ -78,11 +106,14 @@ namespace VismaWeather.ViewModels
             {
                 Cities.Add(city);
             }
+            IsBusy = false;
         }
         private async void LoadWeather()
         {
             string codCity = SelectedCity.CODIGOINE.TrimEnd(new Char[] { '0' });
             Weather = await ElTiempoAPI.GetWeather(SelectedCity.CODPROV, codCity);
+            WeatherStateIcon = 'a' + Weather.stateSky.id;
+            IsBusy = false;
         }
 
 
