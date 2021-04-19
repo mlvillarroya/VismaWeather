@@ -7,8 +7,53 @@
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
             <Label Text="Weather App" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
+        <StackLayout Padding="20">
         <Picker ItemsSource="{Binding Provinces}" Title="Select a province" ItemDisplayBinding="{Binding NOMBRE_PROVINCIA}" SelectedItem="{Binding SelectedProvince}"/>
-        <Picker ItemsSource="{Binding Cities}" Title="Select a city" ItemDisplayBinding="{Binding NOMBRE}" />
+        <Picker ItemsSource="{Binding Cities}" Title="Select a city" ItemDisplayBinding="{Binding NOMBRE}" SelectedItem="{Binding SelectedCity}"/>
+        </StackLayout>
+        <Label FontSize="16" Padding="20,0" IsVisible="{Binding Ready}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="Current temperature: "/>
+                        <Span Text="{Binding  Weather.temperatura_actual}"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label FontSize="16" Padding="20,0" IsVisible="{Binding Ready}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="Humidity: "/>
+                        <Span Text="{Binding  Weather.humedad}"/>
+                        <Span Text="%"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label FontSize="16" Padding="20,0" IsVisible="{Binding Ready}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="Wind: "/>
+                        <Span Text="{Binding  Weather.viento}"/>
+                        <Span Text=" km/h"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label FontSize="16" Padding="20,0" IsVisible="{Binding Ready}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="Rain: "/>
+                        <Span Text="{Binding  Weather.lluvia}"/>
+                        <Span Text="%"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
 
     </StackLayout>
 
