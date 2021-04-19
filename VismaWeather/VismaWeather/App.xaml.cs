@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using VismaWeather.Views;
 
 namespace VismaWeather
 {
@@ -10,7 +11,7 @@ namespace VismaWeather
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new Views.MainPageView();
         }
 
         protected override void OnStart()
